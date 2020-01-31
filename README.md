@@ -9,14 +9,19 @@
 
 ## 目的
 Full automated or user code driven navigation system.
+
 全自动化用户代码驱动导航系统。
 With this system you can define menus, submenus, input fields and other iteration objects that deal with all input/output and can call user defined handler as a result of user iteration.
+
 使用这个系统，你可以定义菜单、子菜单、输入字段和其他迭代对象来处理所有的输入输出，并且可以调用用户定义的处理程序作为用户迭代的结果。
 The user function can be operated as a single action called on click/enter or as a event driven function responding to focus In/Out or Enter/Esc events.
+
 用户函数可以作为单一的被称之为 click/enter 的动作，或者作为事件驱动函数响应 In/Out 或 Enter/Esc 焦点事件。
 The system is designed as a non blocking polling system, allowing concurrent task to run.
+
 系统被设计为非阻塞式轮询系统，允许运行当前任务。
 Optionally the system can be operated in semi-automated mode, issuing navigation command from user code.
+
 系统也可选半自动运行模式，从用户代码发出导航命令。
 See the [wiki](https://github.com/neu-rah/ArduinoMenu/wiki)
 
@@ -119,8 +124,10 @@ void loop() {
 ## 插件
 
 Plugins are particular menu combinations or item customized behaviors and/or drawing.
+
 插件是特定的菜单组合或项目自定义行为和/或绘图
 Some plugins might be platform specific or require some hardware.
+
 一些插件可能局限于特定平台或硬件需求
 - barField - displays a bar for numeric field on LCD
 - barField - 在LCD上显示一个数字条字段
@@ -135,6 +142,7 @@ Some plugins might be platform specific or require some hardware.
 
 Some applications/tutorials using ArduinoMenu, (current and older versions).  
 Do you have another? please let me know on gitter or email me.
+
 一些使用 ArduinoMenu 的应用/教学示例（当前或以前的版本）
 
 **Arduino script for temperature sensor and timer.** It allows to turn on heater and light accordingly to schedule  
@@ -352,11 +360,13 @@ Web browser (experimental) when using ESP devices
 
 ## 依赖
 This library depends on the following libraries:
+
 这个库依赖于下面的库：
 
 - streamFlow https://github.com/neu-rah/streamFlow (on debug mode)
 
 Depending on the type of input or output, other libraries might be needed. Essentially any library needed for your devices.
+
 根据输入输出的类型，需要其他的库。基本上是你的设备所需的库。
 
 ## 限制
@@ -398,10 +408,12 @@ On issues report please specify the input and output drivers or devices as well 
 ## 注意事项
 
 encoder now needs begin() to be called on setup (2.x)
+
 编码器现在需要调用 begin() 在版本(2.x)上
 
 input is read from generic streams, included simple streams for encoders and keyboards
 	- provided encoder driver uses internal pull-ups and reverse logic
+
 从泛型流读取输入，包括编码器和键盘的简单流 - 提供的编码器驱动程序使用内部上拉和反向逻辑
 
 multiple stream packing for input to mix encoder stream with encoder keyboard (usually 1 or 2 keys)
