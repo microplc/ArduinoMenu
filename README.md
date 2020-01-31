@@ -1,22 +1,26 @@
 # ArduinoMenu 4
 
-**Generic menu/interactivity system for the arduino framework**
+**Arduino 框架通用 菜单/交互 系统**
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://spdx.org/licenses/CC-BY-NC-SA-4.0.html)
 [![Build Status](https://travis-ci.org/neu-rah/ArduinoMenu.svg?branch=master)](https://travis-ci.org/neu-rah/ArduinoMenu)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/ruihfazevedo)
 [![Join Gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/ArduinoMenu/Lobby)
 
-## Purpose
+## 目的
 Full automated or user code driven navigation system.
+全自动化用户代码驱动导航系统。
 With this system you can define menus, submenus, input fields and other iteration objects that deal with all input/output and can call user defined handler as a result of user iteration.
+使用这个系统，你可以定义菜单、子菜单、输入字段和其他迭代对象来处理所有的输入输出，并且可以调用用户定义的处理程序作为用户迭代的结果。
 The user function can be operated as a single action called on click/enter or as a event driven function responding to focus In/Out or Enter/Esc events.
+用户函数可以作为单一的被称之为 click/enter 的动作，或者作为事件驱动函数响应 In/Out 或 Enter/Esc 焦点事件。
 The system is designed as a non blocking polling system, allowing concurrent task to run.
+系统被设计为非阻塞式轮询系统，允许运行当前任务。
 Optionally the system can be operated in semi-automated mode, issuing navigation command from user code.
-
+系统也可选半自动运行模式，从用户代码发出导航命令。
 See the [wiki](https://github.com/neu-rah/ArduinoMenu/wiki)
 
-## Simple Example
+## 简单的例子
 ```c++
 #include <menu.h>
 #include <menuIO/serialOut.h>
@@ -42,7 +46,7 @@ MENU_INPUTS(in,&serial);
 
 MENU_OUTPUTS(out,MAX_DEPTH
   ,SERIAL_OUT(Serial)
-  ,NONE//must have 2 items at least
+  ,NONE//注意最少含有两个项目
 );
 
 NAVROOT(nav,mainMenu,MAX_DEPTH,in,out);
@@ -64,53 +68,81 @@ void loop() {
 }
 ```
 
-## Features
+## 特征
 - Small footprint on RAM using PROGMEM on system where it is available.
+- 在可用的系统上使用PROGMEM的RAM占用空间小
 - Wide variety of input/output devices supported.
+- 宽泛的输入/输出设备适应性
 - Easy to define menus (macros).
+- 容易定义菜单（宏）
 - Minimalistic user code base.
+- 极简用户代码库
 - Fields edit values hooked to existing program variables (references).
+- 字段编辑的值与现有程序变量挂钩
 - Editing text fields with per character validation.
+- 编辑文本字段具备字符验证
 - Fields can edit numeric variables of any type (templates).
+- 字段可以编辑任何类型的数值变量（模板）
 - Reflexive fields, showing variable changes done outside the menu system.
+- 反白字段，菜单系统之外显示变量更改
 - Numerical field edit and range validation.
+- 数值字段编辑和范围验证
 - Enumerated fields for numeric and non-numeric types
+- 数字和非数字类型的枚举字段
 - Customizable (colors and cursors).
+- 可自定义（颜色和光标）
 - Able to work over Serial stream IO as a base level.
+- 能够在串行流IO上作为基本级别工作
 - Supports multiple inputs and outputs in parallel.
+- 支持并行的多个输入和输出
 - static allocation of RAM, avoiding heap fragmentation, all RAM needed to define menu structure is allocated at program startup.
+- 静态分配RAM，避免堆栈碎片化，定义菜单结构所需的所有RAM在程序启动时分配
 - events available for menus and prompts
+- 可用于菜单和提示的事件
 - simply returns when no input available and no needed to draw.
+- 当没有可用的输入并且不需要绘制时简单地返回
 - lazy drawing, only draws when changed, avoiding time consumption and flicking.
+- 简化的绘画，只在改变时才绘画，避免时间消耗和弹跳
 - sync/async navigation API functions
+- 同步/异步导航 API 函数
 - async navigation for stateless clients (as web)
+- 无状态客户端的异步导航（作为WEB）
 - web interface (experimental)
+- WEB 界面（实验性的）
 - can be confined to a display area (numeric fields can still overflow the area, user should take account for them)
+- 可限制在展示区内（数值字段仍可能溢出该区域，用户应该考虑到它们）
 - Tested on Arduino AVR's & ARM, Teensy, ESP8266, Esp32, nRF52, STM32
-
-## Videos
+- 在 Arduino AVR's & ARM, Teensy, ESP8266, Esp32, nRF52, STM32 测试通过
+## 视频
 [![IMAGE ALT TEXT](https://img.youtube.com/vi/wHv5sU-HXVI/2.jpg)](https://youtu.be/wHv5sU-HXVI "Arduino menu 2.0 fields video") [![IMAGE ALT TEXT](https://img.youtube.com/vi/W-TRCziF67g/2.jpg)](https://youtu.be/W-TRCziF67g "Arduino menu basic features video") [![IMAGE ALT TEXT](https://img.youtube.com/vi/27KEUTpCHfg/2.jpg)](https://youtu.be/27KEUTpCHfg "Arduino menu 4.x") [![IMAGE ALT TEXT](https://img.youtube.com/vi/ebOWG0ALUWI/2.jpg)](https://youtu.be/ebOWG0ALUWI)
 
-## Plugins
+## 插件
 
 Plugins are particular menu combinations or item customized behaviors and/or drawing.
-
+插件是特定的菜单组合或项目自定义行为和/或绘图
 Some plugins might be platform specific or require some hardware.
-
+一些插件可能局限于特定平台或硬件需求
 - barField - displays a bar for numeric field on LCD
+- barField - 在LCD上显示一个数字条字段
 - cancelField - allows to restore previous numeric value on escape.
+- cancelField - 取消时允许恢复上一个数值
 - SDMenu - full automated SD Card file picker, using standard Arduino SD lib.
+- SDMenu - 全自动SD卡文件拾取，使用标准的 Arduino SD 库
 - SdFatMenu - full automated SD Card file picker, using standard SdFat (https://github.com/greiman/SdFat).
+- SdFatMenu - 全自动SD卡文件拾取，使用标准的 SdFat
 
-## Applications
+## 应用
 
 Some applications/tutorials using ArduinoMenu, (current and older versions).  
 Do you have another? please let me know on gitter or email me.
+一些使用 ArduinoMenu 的应用/教学示例（当前或以前的版本）
 
 **Arduino script for temperature sensor and timer.** It allows to turn on heater and light accordingly to schedule  
+**Arduino 温度传感器和定时器脚本**，它可以根据计划打开加热器和灯光。
 https://github.com/vikulin/LCD_LAT
 
 **Project-GlassKilnController** electrically-heated kiln for making "Warm Glass"  
+**Project-GlassKilnController** 制造“暖玻璃”的电热窑
 https://arduinoinfo.mywikis.net/wiki/Project-GlassKilnController
 
 **ArduinoMenu demo TTGO T-Display** awesome tutorial.  
@@ -170,17 +202,17 @@ https://github.com/dontsovcmc/SmartGreenHouse/tree/master/src
 **console.arduino** Portable serial debug console project using ILI9341  
 https://github.com/malachib/console.arduino
 
-## Platforms
+## 平台
 Atmel AVR, Atmel SAM, Espressif 32, Espressif 8266, Intel ARC32, Microchip PIC32, Nordic nRF51, Nordic nRF52, ST STM32, Teensy, TI MSP430
 
-## Install
+## 安装
 
 **Arduino IDE** - Install using the library manager (ArduinoMenu library - Rui Azevedo)
 
 **Platformio** - http://platformio.org/lib/show/1468/ArduinoMenu%20library
 
-## IO devices
-### Output devices
+## IO 设备
+### Output 设备
 
 **Serial**
 
@@ -295,7 +327,7 @@ depending on your output driver it may be one of (can install both)
 - https://github.com/neu-rah/streamFlow
 - https://github.com/scottdky/Streaming
 
-### Input devices
+### Input 设备
 
 Serial https://www.arduino.cc/en/Reference/Serial
 
@@ -318,48 +350,62 @@ User defined input calling menu navigation API
 
 Web browser (experimental) when using ESP devices
 
-## Dependencies
+## 依赖
 This library depends on the following libraries:
+这个库依赖于下面的库：
 
 - streamFlow https://github.com/neu-rah/streamFlow (on debug mode)
 
 Depending on the type of input or output, other libraries might be needed. Essentially any library needed for your devices.
+根据输入输出的类型，需要其他的库。基本上是你的设备所需的库。
 
-## Limits
+## 限制
 
 - when using macros the menu is limited to 16 options (current macro limnit).
+- 使用菜单宏限制在16个选项（当前宏的限制）
 - menus **must** have at least 2 options when built using macros.
+- 创建使用宏的时候，菜单至少必须有2个选项
 - maximum 127 options.
+- 最大127个选项
 - fast access (numeric keys) only supports 9 options (1 to 9)
+- 快速进入（数字键）仅支持9个选项（1-9）
 - prompts can overflow on panels with less than 4 characters width
+- 宽度小于4个字符的面板上的提示可能溢出
 - menu system is character based, so choose monometric font to achieve best results, it will work with any font but the text can overflow.
+- 菜单系统是基于字符的，因此所以选择单度量字体以获得最佳效果，它可以使用任何字体，但文本可能溢出
 
-## Base
+## 基础
 
 - Character based information display.
+- 基于字符的信息显示
 - Line based menu organization.
+- 基于行的菜单组织
 - Stream IO + specializations.
+- 流IO+专业化
 
-## info
+## 信息
 
-more info at
+更多信息在
 
 [wiki](https://github.com/neu-rah/ArduinoMenu/wiki) pages, [issues](https://github.com/neu-rah/ArduinoMenu/issues?utf8=%E2%9C%93&q=) or [r-site.net](http://www.r-site.net/?lang=en&at=//op%5B@id=%273090%27%5D)
 
-## Errors / Sugestions
+## 错误 / 建议
 
 Please report errors, problems or enhancement ideas, I apreciate the feedback. Thanks.
 
 On issues report please specify the input and output drivers or devices as well as target platform.
 
-## notes
+## 注意事项
 
 encoder now needs begin() to be called on setup (2.x)
+编码器现在需要调用 begin() 在版本(2.x)上
 
 input is read from generic streams, included simple streams for encoders and keyboards
 	- provided encoder driver uses internal pull-ups and reverse logic
+从泛型流读取输入，包括编码器和键盘的简单流 - 提供的编码器驱动程序使用内部上拉和反向逻辑
 
 multiple stream packing for input to mix encoder stream with encoder keyboard (usually 1 or 2 keys)
+
 
 ## History
 
